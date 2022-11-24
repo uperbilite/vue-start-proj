@@ -8,7 +8,8 @@
                 <div class="col-9">
                     <div class="username">{{ fullName }}</div>
                     <div class="followerCount">粉丝：{{ user.followerCount }}</div>
-                    <button type="button" class="btn btn-light btm-sm">+关注</button>
+                    <button @click="follow" v-if="!user.is_followed" type="button" class="btn btn-light btm-sm">+关注</button>
+                    <button @click="unfollow" v-if="user.is_followed" type="button" class="btn btn-light btm-sm">取消关注</button>
                 </div>
             </div>
         </div>
@@ -26,10 +27,18 @@ export default {
             required: true,
         },
     },
-    setup(props) {
+    setup(props, context) {
         let fullName = computed(() => props.user.lastName + ' ' + props.user.firstName);
+        const follow = () => {
+            context.emit("follow");
+        }
+        const unfollow = () => {
+            context.emit("unfollow");
+        }
         return {
             fullName,
+            follow,
+            unfollow,
         }
     }
 }
