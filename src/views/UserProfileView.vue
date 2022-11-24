@@ -5,7 +5,7 @@
                 <UserProfileInfo />
             </div>
             <div class="col-9">
-                帖子列表
+                <UserProfilePosts />
             </div>
         </div>
     </ContentBase>
@@ -14,15 +14,18 @@
 <script>
 import ContentBase from '@/components/ContentBase.vue';
 import UserProfileInfo from '@/components/UserProfileInfo.vue'
+import UserProfilePosts from '@/components/UserProfilePosts.vue'
 
 export default {
     name: 'UserProfileView',
     components: {
         ContentBase,
         UserProfileInfo,
+        UserProfilePosts,
     }
 }
 </script>
 
 <style scope>
+
 </style>
