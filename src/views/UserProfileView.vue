@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <UserProfileInfo @follow="follow" @unfollow="unfollow" :user="user" />
-                <UserProfileWrite />
+                <UserProfileWrite @submit_post="submit_post"/>
             </div>
             <div class="col-9">
                 <UserProfilePosts :posts="posts" />
@@ -70,11 +70,21 @@ export default {
             user.followerCount--;
         };
 
+        const submit_post = (content) => {
+            posts.count++;
+            posts.posts.unshift({
+                id: posts.count,
+                userId: 1,
+                content: content,
+            })
+        };
+
         return {
             user,
             follow,
             unfollow,
             posts,
+            submit_post,
         }
     },
 }
