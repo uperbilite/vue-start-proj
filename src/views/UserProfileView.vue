@@ -35,7 +35,6 @@ export default {
         const store = useStore();
         const route = useRoute();
         const userId = parseInt(route.params.userId);
-        console.log(userId);
         const user = reactive({});
         const posts = reactive({});
 
