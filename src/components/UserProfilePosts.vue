@@ -5,6 +5,7 @@
                 <div class="card single-post">
                     <div class="card-body">
                         {{ post.content }}
+                        <button v-if="is_me" type="button" class="btn btn-danger btn-sm">删除</button>
                     </div>
                 </div>
             </div>
@@ -13,6 +14,9 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
     name: "UserProfilePosts",
     props: {
@@ -20,6 +24,18 @@ export default {
             type: Object,
             required: true,
         },
+        user: {
+            type: Object,
+            required: true,
+        }
+    },
+    setup(props) {
+        const store = useStore();
+        let is_me = computed(() => store.state.user.id === props.user.id);
+
+        return {
+            is_me
+        }
     }
 }
 </script>
@@ -27,5 +43,9 @@ export default {
 <style scoped>
 .single-post {
     margin-bottom: 10px;
+}
+
+button {
+    float: right;
 }
 </style>
