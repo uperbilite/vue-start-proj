@@ -3,10 +3,10 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-3">
-                    <img class="img-fluid" src="http://www.bingguner.com/upimg/allimg/191210/19-191210103310293.jpg" alt="">
+                    <img class="img-fluid" :src="user.photo" alt="">
                 </div>
                 <div class="col-9">
-                    <div class="username">{{ fullName }}</div>
+                    <div class="username">{{ user.username }}</div>
                     <div class="followerCount">粉丝：{{ user.followerCount }}</div>
                     <button @click="follow" v-if="!user.is_followed" type="button" class="btn btn-light btm-sm">+关注</button>
                     <button @click="unfollow" v-if="user.is_followed" type="button" class="btn btn-light btm-sm">取消关注</button>
@@ -17,8 +17,6 @@
 </template>
 
 <script>
-import { computed } from 'vue';
-
 export default {
     name: "UserProfileInfo",
     props: {
@@ -28,7 +26,6 @@ export default {
         },
     },
     setup(props, context) {
-        let fullName = computed(() => props.user.lastName + ' ' + props.user.firstName);
         const follow = () => {
             context.emit("follow");
         }
@@ -36,7 +33,6 @@ export default {
             context.emit("unfollow");
         }
         return {
-            fullName,
             follow,
             unfollow,
         }

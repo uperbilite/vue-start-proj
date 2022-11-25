@@ -19,6 +19,8 @@ import UserProfilePosts from '@/components/UserProfilePosts.vue';
 import UserProfileWrite from '@/components/UserProfileWrite.vue';
 import { reactive } from 'vue';
 import { useRoute } from 'vue-router';
+import $ from 'jquery';
+import { useStore } from 'vuex';
 
 export default {
     name: 'UserProfileView',
@@ -29,39 +31,30 @@ export default {
         UserProfileWrite,
     },
     setup() {
+        const store = useStore();
         const route = useRoute();
         const userId = route.params.userId;
         console.log(userId);
+        const user = reactive({});
+        const posts = reactive({});
 
-        const user = reactive({
-            id: 1,
-            username: "uperbilite",
-            lastName: "Deng",
-            firstName: "Bilite",
-            followerCount: 123,
-            is_followed: true,
-        })
-
-        const posts = reactive({
-            count: 3,
-            posts: [
-                {
-                    id: 1,
-                    userId: 1,
-                    content: "text1",
-                },
-                {
-                    id: 2,
-                    userId: 1,
-                    content: "text2",
-                },
-                {
-                    id: 3,
-                    userId: 1,
-                    content: "text3",
-                },
-            ],
-        })
+        $.ajax({
+            url: "https://app165.acapp.acwing.com.cn/myspace/getinfo/",
+            type: "GET",
+            data: {
+                user_id: userId,
+            },
+            headers: {
+                'Authorization': "Bearer " + store.state.user.access,
+            },
+            success(resp) {
+                user.id = resp.id;
+                user.username = resp.username;
+                user.photo = resp.photo;
+                user.followerCount = resp.followerCount;
+                user.is_followed = resp.is_followed;
+            }
+        });
 
         const follow = () => {
             if (user.is_followed) return;
