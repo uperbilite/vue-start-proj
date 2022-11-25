@@ -37,6 +37,10 @@ const routes = [
     name: 'notfoundview',
     component: NotFoundView
   },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/notfoundview',
+  }
 ]
 
 const router = createRouter({
