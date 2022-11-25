@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 img {
     border-radius: 50%;
 }

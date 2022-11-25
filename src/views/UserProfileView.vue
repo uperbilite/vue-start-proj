@@ -18,6 +18,7 @@ import UserProfileInfo from '@/components/UserProfileInfo.vue';
 import UserProfilePosts from '@/components/UserProfilePosts.vue';
 import UserProfileWrite from '@/components/UserProfileWrite.vue';
 import { reactive } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
     name: 'UserProfileView',
@@ -28,6 +29,10 @@ export default {
         UserProfileWrite,
     },
     setup() {
+        const route = useRoute();
+        const userId = route.params.userId;
+        console.log(userId);
+
         const user = reactive({
             id: 1,
             username: "uperbilite",
@@ -90,6 +95,6 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 
 </style>
