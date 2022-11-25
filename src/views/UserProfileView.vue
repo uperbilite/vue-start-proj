@@ -56,6 +56,20 @@ export default {
             }
         });
 
+        $.ajax({
+            url: "https://app165.acapp.acwing.com.cn/myspace/post/",
+            type: "GET",
+            data: {
+                user_id: userId,
+            },
+            headers: {
+                'Authorization': "Bearer " + store.state.user.access,
+            },
+            success(resp) {
+                posts.posts = resp;
+            }
+        });
+
         const follow = () => {
             if (user.is_followed) return;
             user.is_followed = true;
