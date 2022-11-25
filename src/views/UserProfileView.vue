@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-3">
                 <UserProfileInfo @follow="follow" @unfollow="unfollow" :user="user" />
-                <UserProfileWrite @submit_post="submit_post"/>
+                <UserProfileWrite v-if="is_me" @submit_post="submit_post"/>
             </div>
             <div class="col-9">
                 <UserProfilePosts :posts="posts" />
@@ -21,6 +21,7 @@ import { reactive } from 'vue';
 import { useRoute } from 'vue-router';
 import $ from 'jquery';
 import { useStore } from 'vuex';
+import { computed } from 'vue';
 
 export default {
     name: 'UserProfileView',
@@ -33,7 +34,7 @@ export default {
     setup() {
         const store = useStore();
         const route = useRoute();
-        const userId = route.params.userId;
+        const userId = parseInt(route.params.userId);
         console.log(userId);
         const user = reactive({});
         const posts = reactive({});
@@ -91,12 +92,15 @@ export default {
             })
         };
 
+        const is_me = computed(() => userId == store.state.user.id);
+
         return {
             user,
             follow,
             unfollow,
             posts,
             submit_post,
+            is_me,
         }
     },
 }
