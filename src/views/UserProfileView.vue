@@ -67,6 +67,7 @@ export default {
                 'Authorization': "Bearer " + store.state.user.access,
             },
             success(resp) {
+                posts.count = resp.length;
                 posts.posts = resp;
             }
         });
