@@ -35,7 +35,7 @@
           </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" style="cursor: pointer">退出</a>
+          <a class="nav-link" style="cursor: pointer" @click="logout">退出</a>
         </li>
       </ul>
     </div>
@@ -44,8 +44,22 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+
 export default {
     name: "NavBar",
+    setup() {
+      const store = useStore();
+
+      const logout = () => {
+        store.commit('logout');
+      };
+
+      return {
+        logout
+      }
+    },
+
 }
 </script>
 
