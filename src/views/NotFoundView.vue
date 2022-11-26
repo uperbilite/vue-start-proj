@@ -1,19 +1,16 @@
 <template>
-    <ContentBase>
-        404
-    </ContentBase>
+  <ContentBase> 404 </ContentBase>
 </template>
-  
+
 <script>
-import ContentBase from '@/components/ContentBase.vue';
+import ContentBase from "@/components/ContentBase.vue";
 
 export default {
-    name: 'NotFoundView',
-    components: {
-        ContentBase,
-    }
-}
+  name: "NotFoundView",
+  components: {
+    ContentBase,
+  },
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
